@@ -1,0 +1,73 @@
+<div class="card-input-currency">
+  <h2>BRL EXCHANGE RATE</h2>
+  <form class="form">
+    <mat-form-field class="mat-form-field">
+      <mat-label>Enter the Currency Code</mat-label>
+      <textarea 
+        matInput 
+        placeholder="USD, EUR, CAD..." 
+        [(ngModel)]="currencyCodeFrom" 
+        name="currencyCodeFrom"
+        class="text-center"
+        (input)="upperCaseInput()">
+      </textarea>
+    </mat-form-field>
+  </form>
+  <button class="btn-card-input-currency" (click)="getCurrentExchangeRate()">EXCHANGE RESULT</button>
+</div>
+<hr>
+<br>
+<div class="card-rate-now" *ngIf="showExchangeRate">
+  <mat-card class="mat-form-card-rate-now">
+    <div class="rate-now-infos">
+      <div class="infos-rate">
+        <h3>Exchange Rate Now</h3>
+        <p>{{ exchangeRateData.lastUpdatedAt | date: 'dd/MM/yyyy HH:mm' }}</p>
+      </div>
+      <div class="coins">
+        <h2>{{ exchangeRateData.fromSymbol }}/ BRL</h2>
+      </div>
+    </div>
+    <div class="current-rate">
+      <h1>R$ {{ exchangeRateData.exchangeRate | number:'1.2-2' }}</h1>
+    </div>
+    <div class="view-last-month" (click)="getMonthExchangeRates()">
+      <span>LAST 30 DAYS</span>
+      <a>
+        <mat-icon aria-hidden="false" [fontIcon]="showCards ? 'add' : 'remove'"></mat-icon>
+      </a>
+    </div>
+  </mat-card>
+</div>
+<br>
+<div class="card-last-month">
+  <ng-container *ngFor="let data of dailyExchangeRateData">
+    <mat-card class="mat-card-last-month">
+      <div class="data">
+        <span id="date">{{ data.date | date: 'dd/MM/yyyy' }}</span>
+      </div>
+
+      <div class="values-infos">
+        <span>OPEN: {{ formatCurrency(data.open) }}</span>
+        <span>HIGH: {{ formatCurrency(data.high) }}</span>
+      </div>
+
+      <div class="values-infos">
+        <span>CLOSE: {{ formatCurrency(data.close) }}</span>
+        <span>LOW: {{ formatCurrency(data.low) }}</span>
+      </div>
+
+      <div class="diff">
+        <span class="title">CLOSE DIFF(%): </span>
+        <span [ngClass]="{ 'negative-diff': isNegativeDiff(data), 'positive-diff': !isNegativeDiff(data) }">
+          {{ differenceCalculation(data) | number: '1.2-2' }}%
+          <mat-icon aria-hidden="false" aria-label="Example home icon"
+            *ngIf="isNegativeDiff(data)">keyboard_arrow_down</mat-icon>
+          <mat-icon aria-hidden="false" aria-label="Example home icon"
+            *ngIf="!isNegativeDiff(data)">keyboard_arrow_up</mat-icon>
+        </span>
+      </div>
+    </mat-card>
+    <br>
+  </ng-container>
+</div>
