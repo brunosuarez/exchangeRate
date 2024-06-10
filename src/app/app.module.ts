@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 
 import { HeaderComponent } from './components/layouts/header/header.component';
 import { FooterComponent } from './components/layouts/footer/footer.component';
-import { CardExchangeRate } from './components/card-exchange-rate/card-exchange-rate.component';
+import { Card } from './components/card/card.component';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -25,7 +25,7 @@ import { HttpClientModule } from '@angular/common/http';
     HeaderComponent,
     FooterComponent,
     AppComponent,
-    CardExchangeRate,
+    Card,
   ],
   imports: [
     BrowserModule,

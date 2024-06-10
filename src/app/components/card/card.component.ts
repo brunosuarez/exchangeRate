@@ -3,11 +3,11 @@ import { CardRateLastMonthService, DailyExchangeRate } from '../services/card-ra
 import { CardRateNowService } from '../services/card-rate-now.service';
 
 @Component({
-  selector: 'app-card-exchange-rate',
-  templateUrl: './card-exchange-rate.component.html',
-  styleUrls: ['./card-exchange-rate.component.scss']
+  selector: 'app-card',
+  templateUrl: './card.component.html',
+  styleUrls: ['./card.component.scss']
 })
-export class CardExchangeRate implements OnInit {
+export class Card implements OnInit {
 
   exchangeRateData: any = null;
   currencyCodeFrom: string = '';
